@@ -56,6 +56,7 @@ class App extends Component {
                 click={() => this.deletePerson(index)}
                 name={person.name}
                 age={person.age}
+                key={index}
               />
             );
           })}
