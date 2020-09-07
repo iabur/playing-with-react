@@ -9,6 +9,7 @@ class App extends Component {
       { name: 'rohim', age: 30 },
       { name: 'korim', age: 33 },
     ],
+    show: true,
   };
 
   switchNameHandler = (newName) => {
@@ -31,6 +32,13 @@ class App extends Component {
     });
   };
 
+  switchPersonName = () => {
+    const showPerson = this.state.show;
+    this.setState({
+      show: !showPerson,
+    });
+  };
+
   render() {
     const style = {
       backgroundColor: 'while',
@@ -42,24 +50,25 @@ class App extends Component {
     return (
       <div className='App'>
         <h1>Hello, This is first react app</h1>
-        <button
-          style={style}
-          onClick={() => this.switchNameHandler('iabur rahman')}
-        >
+        <button style={style} onClick={this.switchPersonName}>
           click me
         </button>
-        <Person
-          name={this.state.Person[0].name}
-          age={this.state.Person[0].age}
-        />
-        <Person
-          click={() => this.switchNameHandler('iabur')}
-          changed={this.onChangeHandler}
-          name={this.state.Person[1].name}
-          age={this.state.Person[1].age}
-        >
-          I am a shopkeeper
-        </Person>
+        {this.state.show ? (
+          <div>
+            <Person
+              name={this.state.Person[0].name}
+              age={this.state.Person[0].age}
+            />
+            <Person
+              click={() => this.switchNameHandler('iabur')}
+              changed={this.onChangeHandler}
+              name={this.state.Person[1].name}
+              age={this.state.Person[1].age}
+            >
+              I am a shopkeeper
+            </Person>
+          </div>
+        ) : null}
       </div>
     );
   }
