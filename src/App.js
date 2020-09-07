@@ -47,28 +47,33 @@ class App extends Component {
       border: '2px',
       cursor: 'pointer',
     };
+
+    let persons = null;
+    if (this.state.show) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.Person[0].name}
+            age={this.state.Person[0].age}
+          />
+          <Person
+            click={() => this.switchNameHandler('iabur')}
+            changed={this.onChangeHandler}
+            name={this.state.Person[1].name}
+            age={this.state.Person[1].age}
+          >
+            I am a shopkeeper
+          </Person>
+        </div>
+      );
+    }
     return (
       <div className='App'>
         <h1>Hello, This is first react app</h1>
         <button style={style} onClick={this.switchPersonName}>
           click me
         </button>
-        {this.state.show ? (
-          <div>
-            <Person
-              name={this.state.Person[0].name}
-              age={this.state.Person[0].age}
-            />
-            <Person
-              click={() => this.switchNameHandler('iabur')}
-              changed={this.onChangeHandler}
-              name={this.state.Person[1].name}
-              age={this.state.Person[1].age}
-            >
-              I am a shopkeeper
-            </Person>
-          </div>
-        ) : null}
+        {persons}
       </div>
     );
   }
