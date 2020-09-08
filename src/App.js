@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
 import './App.css';
+import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -54,8 +54,8 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer',
       ':hover': {
-        backgroundColor: 'lightGreen',
-        color: 'white',
+        backgroundColor: 'lightgreen',
+        color: 'black',
       },
     };
 
@@ -67,38 +67,43 @@ class App extends Component {
           {this.state.persons.map((person, index) => {
             return (
               <Person
-                changed={(event) => this.nameChangedHandler(event, person.id)}
                 click={() => this.deletePersonHandler(index)}
                 name={person.name}
                 age={person.age}
                 key={person.id}
+                changed={(event) => this.nameChangedHandler(event, person.id)}
               />
             );
           })}
         </div>
       );
 
+      style.backgroundColor = 'red';
       style[':hover'] = {
-        backgroundColor: 'lightRed',
+        backgroundColor: 'salmon',
         color: 'black',
       };
     }
+
     const classes = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      classes.push('red'); // classes = ['red']
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      classes.push('bold'); // classes = ['red', 'bold']
     }
+
     return (
-      <div className='App'>
-        <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
-          Toggle Persons
-        </button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className='App'>
+          <h1>Hi, I'm a React App</h1>
+          <p className={classes.join(' ')}>This is really working!</p>
+          <button style={style} onClick={this.togglePersonsHandler}>
+            Toggle Persons
+          </button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
